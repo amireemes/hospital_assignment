@@ -243,14 +243,3 @@ def root(db: Session = Depends(get_db)):
     print("\n\nQuery 11:")
     for row in result10:
         print("Disease Type: " + row["disease_code"] + ", Patients treated: " + str(row["patients_treated"]))
-
-
-
-
-
-
-
-    # query1 = db.query(Disease).join(Discover).filter(Disease.pathogen == "bacteria", extract('year', Discover.first_enc_date) <= 1990).all()
-    # for each in query1:
-    #     print(each)
-    # return {"\n\nmessage": "Hello World"}
