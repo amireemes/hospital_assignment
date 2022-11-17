@@ -395,28 +395,28 @@ def get_first_query(db: Session = Depends(get_db)) -> Any:
 #     for row in result8:
 #         print("Email: " + row["email"] + ", Name: " + row["name"] + ", Department: " + row["department"])
 #
-#     # 10.	 List the top 5 counties with the highest number of total patients recorded.
-#
-#     result9 = sqlalchemy_engine.execute("select S.cname, sum(S.total_patients) as total_patients "
-#                                         "from assignment2.record S "
-#                                         "group by S.cname "
-#                                         "order by total_patients desc "
-#                                         "limit 5;")
-#     print("\n\nQuery 10:")
-#     for row in result9:
-#         print("Country: " + row["cname"] + ", Total_patients: " + str(row["total_patients"]))
-#
-#     # 11. Group the diseases by disease type and the total number of patients treated
-#
-#     result10 = sqlalchemy_engine.execute(
-#         "select S.disease_code, sum(D.total_patients - D.total_deaths) as 'patients_treated' "
-#         "from assignment2.disease S "
-#         "inner join assignment2.record D on S.disease_code = D.disease_code "
-#         "group by D.disease_code ")
-#
-#     print("\n\nQuery 11:")
-#     for row in result10:
-#         print("Disease Type: " + row["disease_code"] + ", Patients treated: " + str(row["patients_treated"]))
+    # # 10.	 List the top 5 counties with the highest number of total patients recorded.
+    #
+    # result9 = sqlalchemy_engine.execute("select S.cname, sum(S.total_patients) as total_patients "
+    #                                     "from assignment2.record S "
+    #                                     "group by S.cname "
+    #                                     "order by total_patients desc "
+    #                                     "limit 5;")
+    # print("\n\nQuery 10:")
+    # for row in result9:
+    #     print("Country: " + row["cname"] + ", Total_patients: " + str(row["total_patients"]))
+    #
+    # # 11. Group the diseases by disease type and the total number of patients treated
+    #
+    # result10 = sqlalchemy_engine.execute(
+    #     "select S.disease_code, sum(D.total_patients - D.total_deaths) as 'patients_treated' "
+    #     "from assignment2.disease S "
+    #     "inner join assignment2.record D on S.disease_code = D.disease_code "
+    #     "group by D.disease_code ")
+    #
+    # print("\n\nQuery 11:")
+    # for row in result10:
+    #     print("Disease Type: " + row["disease_code"] + ", Patients treated: " + str(row["patients_treated"]))
 
     # result7 = sqlalchemy_engine.execute("create index idx_pathogen on assignment2.disease(pathogen)")
 
