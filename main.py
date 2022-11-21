@@ -18,7 +18,7 @@ templates = Jinja2Templates(directory="templates")
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # Database connection
-my_database_url = "mysql+pymysql://root:Amir.Ergaliev2@localhost:3306/assignment2"
+my_database_url = "mysql+pymysql://amir:password@database:3306/hospital_db"
 sqlalchemy_engine = create_engine(my_database_url, isolation_level="READ COMMITTED")
 sessionLocal = sessionmaker(autoflush=False, autocommit=False, bind=sqlalchemy_engine)
 Base = declarative_base()
@@ -378,13 +378,13 @@ def update_user(request: Request, email: str, name: str = Form(...),
     }
     new_data = UserUpdate(**updated_user_data)
     updated_user = crud.update_user(new_data, item_in_db, db)
-    return RedirectResponse("http://127.0.0.1:8000/users/?message=update", status_code=status.HTTP_302_FOUND)
+    return RedirectResponse("http://backend/users/?message=update", status_code=status.HTTP_302_FOUND)
 
 
 @app.get("/user/delete/{email}", response_model=UserScheme, tags=["User"])  # USER
 def delete_user(email: str, db: Session = Depends(get_db)) -> Any:
     crud.delete_user(email, db)
-    return RedirectResponse("http://127.0.0.1:8000/users/?message=delete", status_code=status.HTTP_302_FOUND)
+    return RedirectResponse("http://backend/users/?message=delete", status_code=status.HTTP_302_FOUND)
 
 
 @app.get("/records", response_model=list[RecordScheme], tags=["Record"])  # RECORDS
@@ -412,13 +412,13 @@ def post_record(request: Request, email: str = Form(...), country: str = Form(..
     }
     record = RecordScheme(**record_data)
     crud.create_record(record, db)
-    return RedirectResponse("http://127.0.0.1:8000/records/?message=create", status_code=status.HTTP_302_FOUND)
+    return RedirectResponse("http://backend/records/?message=create", status_code=status.HTTP_302_FOUND)
 
 
 @app.get("/record/delete/{email}", response_model=RecordScheme, tags=["Record"])  # USER
 def delete_record(email: str, db: Session = Depends(get_db)) -> Any:
     crud.delete_record(email, db)
-    return RedirectResponse("http://127.0.0.1:8000/records/?message=delete", status_code=status.HTTP_302_FOUND)
+    return RedirectResponse("http://backend/records/?message=delete", status_code=status.HTTP_302_FOUND)
 
 
 # @app.get("/user/delete/{email}", response_model=UserScheme, tags=["User"])  # USER
@@ -466,7 +466,7 @@ def create_publicservant(request: Request, email: str = Form(...), department: s
     }
     publicservant = PublicServantScheme(**publicservant_data)
     crud.create_publicservant(publicservant, db)
-    return RedirectResponse("http://127.0.0.1:8000/publicservants/?message=create", status_code=status.HTTP_302_FOUND)
+    return RedirectResponse("http://backend/publicservants/?message=create", status_code=status.HTTP_302_FOUND)
 
 
 @app.post("/publicservant/update/{email}", response_model=PublicServantScheme, tags=["Public Servant"])  # PUBLICSERVANT
@@ -480,12 +480,12 @@ def update_publicservant(request: Request, email: str, department: str = Form(..
     }
     updated_ps = PublicServantUpdate(**updated_public_servant)
     new_ps = crud.update_publicservant(updated_ps, item_in_db, db)
-    return RedirectResponse("http://127.0.0.1:8000/publicservants/?message=update", status_code=status.HTTP_302_FOUND)
+    return RedirectResponse("http://backend/publicservants/?message=update", status_code=status.HTTP_302_FOUND)
 
 @app.get("/publicservant/delete/{email}", response_model=PublicServantScheme, tags=["Public Servant"])  # PUBLICSERVANT
 def delete_publicservant(email: str, db: Session = Depends(get_db)) -> Any:
     crud.delete_publicservant(email, db)
-    return RedirectResponse("http://127.0.0.1:8000/publicservants/?message=delete", status_code=status.HTTP_302_FOUND)
+    return RedirectResponse("http://backend/publicservants/?message=delete", status_code=status.HTTP_302_FOUND)
 
 
 @app.get("/publicservant/{email}", response_model=PublicServantScheme, tags=["Public Servant"])  # PUBLICSERVANT
